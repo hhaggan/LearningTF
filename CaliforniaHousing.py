@@ -1,14 +1,13 @@
 import numpy as np 
-# import tensorflow.compat.v1 as tf
-# tf.disable_v2_behavior()
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+# import tensorflow as tf
 import sklearn
-# from sklearn.datasets.california_housing import fetch_california_housing
+from sklearn.datasets import fetch_california_housing
 [dataset for dataset in sklearn.datasets.__dict__.keys() if str(dataset).startswith("fetch_") or str(dataset).startswith("load_")]
 
 from sklearn.datasets.california_housing import fetch_california_housing
 
-print("Hello")
 housing = fetch_california_housing()
 m, n = housing.data.shape
 housing_data_plus_bias = np.c_[np.ones((m, 1)), housing.data]
