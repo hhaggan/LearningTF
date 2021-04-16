@@ -83,5 +83,5 @@ resnet.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics
 
 dataset = tfds.load('mnist', split=tfds.Split.TRAIN)
 
-dataaset = dataaset.map(preprocess).batch(32)
-resent.fit(dataset, epochs=1)
+dataset = dataaset.map(preprocess).batch(32)
+resnet.fit(dataset, epochs=1)
