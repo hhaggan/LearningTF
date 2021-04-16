@@ -1,3 +1,4 @@
+import tensorflow as tf
 from tensorflow.keras.layers import Layer
 
 class SimpleDense(Layer):
@@ -6,7 +7,7 @@ class SimpleDense(Layer):
         '''Initializes the instance attributes'''
         super(SimpleDense, self).__init__()
         self.units = units
-        self.activation = tf.keras.activation.get(activation)
+        self.activation = tf.keras.layers.Activation(activation)
 
     def build(self, input_shape):
         '''Create the state of the layer (weights)'''
@@ -56,7 +57,7 @@ class SimpleDense(Layer):
 # print(model.predict([10.0]))
 
 # see the updated state of the variables
-print(my_layer.variables)
+# print(my_layer.variables)
 
 
 #try MNIST Data
