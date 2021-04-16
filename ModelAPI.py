@@ -34,7 +34,7 @@ class IdentityBlock(tf.keras.Model):
         self.conv2 = tf.keras.layers.Conv2D(filters, kernel_size, padding='same')
         self.bn2 = tf.keras.layers.BatchNormalization()
 
-        self.act = tf.keras.activations('relu')
+        self.act = tf.keras.layers.Activation('relu')
         self.add = tf.keras.layers.Add()
 
     def call(self, input_tensor):
@@ -83,5 +83,5 @@ resnet.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics
 
 dataset = tfds.load('mnist', split=tfds.Split.TRAIN)
 
-dataset = dataaset.map(preprocess).batch(32)
+dataset = dataset.map(preprocess).batch(32)
 resnet.fit(dataset, epochs=1)
