@@ -58,9 +58,24 @@ class ResNet(tf.keras.Model):
         self.act = tf.keras.layers.Activation('relu')
         self.max_pool = tf.keras.layers.MaxPool2D((3,3))
         self.id1a = IdentityBlock(64,3)
-        self.id2b = IdentityBlock(64,3)
+        self.id1b = IdentityBlock(64,3)
         self.global_pool = tf.keras.layers.GlobalAveragePooling2D()
         self.classifier = tf.keras.layers.Dense(num_classes, activation='relu')
+
+    def call(self, inputs):
+        x = self.conv(inputs)
+        x = self.bn(x)
+        x = self.act(x)
+
+        x = self.max_pool(x)
+        x = self.id1a(x)
+        x = self.id1b(x)
+        x = self.global_pool(x)
+
+        return self.classifier(x)
+
+def preprocess(features):
+    return tf.cast(features["image"], tf.float32)/255., features['label']
 
 resnet = ResNet(10)
 resnet.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
